@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>首页</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="css/swiper-3.4.1.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/common.css"/>
+		<script src="js/jquery-1.10.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/rem.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/swiper-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			body{
+				
+			}
+			/*=================header===================*/
+			.header{
+				width: 100%;
+				height: 2rem;
+				line-height: 2rem;
+				overflow:hidden;
+				background: #000;
+			}
+			.header img{
+				height:1.5rem;
+				width:1.5rem;
+				margin:0.25rem 0.5rem;
+				border-radius:50%;
+				background:#fff;
+				float:left;
+			}
+			.sea{
+				float:left;
+				padding:0.38rem 0;
+				
+			}
+			.sea input{
+				width:6rem;
+				height:1.2rem;
+				border:1px solid #901919;
+				padding:0 0.5rem;
+				font-size: 0.6rem;
+				float: left;
+			}
+			.sea a{
+				display: block;
+				float: left;
+				height: 1.2rem;
+				width: 2rem;
+				line-height: 1.2rem;
+				background: #901919;
+				color: #fff;
+				font-size: 0.7rem;
+				text-align: center;
+				border:1px solid #901919;
+			}
+			.login{
+				float: right;
+				height: 2rem;
+				line-height: 2rem;
+				font-size: 0.6rem;
+				padding-right: 0.5rem;
+				color: #901919;
+			}
+			.login a{
+				color: #901919;
+				display: inline-block;
+				padding: 0 0.3rem;
+			}
+			.content{
+				width: 100%;
+			}
+			/*=================轮播图===================*/
+			.swiper-container{
+				width: 100%;
+				height: 15rem;
+			}
+			.swiper-slide{
+				width: 100%;
+				height: 100%;
+				background:#fff;
+			}
+			.swiper-slide img{
+				width:100%;
+				height:100%;
+			}
+			
+			/*=================滚动消息=======================*/
+			.news{
+				height:3rem;
+				padding:0 0.5rem;
+				overflow: hidden;
+			}
+			.news img{
+				display:block;
+				height:3rem;
+				width:3rem;
+				float:left;
+			}
+			.news .xiaoxi{
+				float: left;
+				margin: 0.5rem 0;
+				width: 12rem;
+				height: 2rem;
+				overflow: hidden;
+			}
+			.news ul{
+				height: 2rem;
+			}
+			.news li{
+				height: 1rem;
+				line-height: 1rem;
+				
+			}
+			.news a{
+				font-size: 0.7rem;
+				display: block;
+				width: 12rem;
+				text-overflow: ellipsis;
+				overflow: hidden;
+				white-space: nowrap;
+				font-family: "楷体";
+				font-weight: bold;
+			}
+			
+			/*=================nav=====================*/
+			.nav{
+				padding: 0.2rem;
+			}
+			.nav ul{
+				overflow: hidden;
+			}
+			.nav li{
+				margin: 0.2rem;
+				height: 4.8rem;
+				width: 4.8rem;
+				background: #901919;
+				font-size: 0.8rem;
+				text-align: center;
+				float: left;
+				line-height: 4.8rem;
+			}
+			.nav li a{
+				color: #fff;
+			}
+			
+			/*================list===================*/
+			.list{
+				min-height: 2rem;
+				padding: 0.5rem;
+				overflow: hidden;
+			}
+			.list li{
+				overflow: hidden;
+				border-bottom: 1px solid #ccc;
+				padding: 0.5rem 0;
+			}
+			.list img{
+				width: 2rem;
+				float: left;
+			}
+			.ziliao{
+				float: left;
+				font-size: 0.7rem;
+				width: 12rem;
+				padding-left: 1rem;
+			}
+			.ziliao p{
+				float: left;
+				width: 5rem;
+				padding: 0 0.5rem;
+				text-overflow: ellipsis;
+				overflow: hidden;
+				white-space: nowrap;
+				font-size: 0.5rem;
+				height: 1rem;
+			}
+			.ziliao .name{
+				font-size: 0.7rem;
+			}
+			.txt{
+				color: #999;
+			}
+			
+			
+			
+			/*=================底部===================*/
+			.bottom{
+				height:2rem;
+				background:#000;
+				padding:0.3rem 0;
+			}
+			.bottom ul{
+				min-height:2rem;
+				width:100%;
+			}
+			.bottom li{
+				width:25%;
+				min-height:2rem;
+				text-align:center;
+				float:left;
+			}
+			.bottom img{
+				height:1rem;
+				width:1rem;
+				margin:0 auto;
+			}
+			.bottom p{
+				font-size:0.7rem;
+				color:#fff;
+				height:1.2rem;
+				line-height:1.2rem;
+			}
+		</style>
+		<script type="text/javascript">
+			$(function(){
+				var mySwiper = new Swiper ('.swiper-container', {
+				    loop: true,
+				    autoplay:2500,
+				    // 如果需要分页器
+				    pagination: '.swiper-pagination'
+				  })
+				
+				//消息滚动
+				var timer = null;
+				clearInterval(timer);
+				timer = setInterval(function(){
+					$(".news ul").animate({"marginTop":"-1rem"},function(){
+						var child = $(this).find("li").eq(0);
+						child.appendTo($(".news ul"));
+						$(".news ul").css("marginTop","0");
+					});
+				},2500);
+			})
+		</script>
+	</head>
+	<body>
+		<div class="box">
+			<div class="header">
+				<img src="img/news.png" />
+				<div class="sea">
+					<input type="text" placeholder="美妆师、美妆" />
+					<a href="#">搜索</a>
+				</div>
+				<div class="login">
+					<a href="#">注册</a>|<a href="#">登录</a>
+				</div>
+			</div>
+			<div class="content">
+				<div class="swiper-container">
+				    <div class="swiper-wrapper">
+				        <div class="swiper-slide">
+							<img class="Img" src="img/con_bg.png" />
+						</div>
+				        <div class="swiper-slide">
+							<img class="Img" src="img/con_bg.png" />
+						</div>
+				        <div class="swiper-slide">
+							<img class="Img" src="img/con_bg.png" />
+						</div>
+				    </div>
+				    <!-- 如果需要分页器 -->
+				    <div class="swiper-pagination"></div>
+				</div>
+				<div class="news">
+					<img src="img/news.png"/>
+					<div class="xiaoxi">
+						<ul>
+							<li><a href="#">新娘妆特价8折优惠！</a></li>
+							<li><a href="#">单次消费满1000元送200元优惠券广东佛山！</a></li>
+							<li><a href="#">情人节约会专属9.9折，长长久久！</a></li>
+							<li><a href="#">单次消费满1万元，赠送钻石手串一条！</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="nav">
+					<ul>
+						<li><a href="#">化妆造型师</a></li>
+						<li><a href="#">化妆工作室</a></li>
+						<li><a href="#">江湖救急</a></li>
+						<li><a href="#">关于我们</a></li>
+						<li><a href="#">美妆课程</a></li>
+					</ul>
+				</div>
+				<div class="list">
+					<ul>
+						<li>
+							<a href="#">
+								<img src="img/touxiang.jpg"/>
+								<div class="ziliao">
+									<p class="name">化妆师：<span>李多多</span></p>
+									<p class="txt">星级：<span>3星</span></p>
+									<p class="txt">爱美宣言:<span></span></p>
+									<p class="txt"><a class="txt" href="#">点击查看更多</a></p>
+								</div>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="img/touxiang.jpg"/>
+								<div class="ziliao">
+									<p class="name">化妆师：<span>李多多</span></p>
+									<p class="txt">星级：<span>3星</span></p>
+									<p class="txt">爱美宣言:<span></span></p>
+									<p class="txt"><a class="txt" href="#">点击查看更多</a></p>
+								</div>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="img/touxiang.jpg"/>
+								<div class="ziliao">
+									<p class="name">化妆师：<span>李多多</span></p>
+									<p class="txt">星级：<span>3星</span></p>
+									<p class="txt">爱美宣言:<span></span></p>
+									<p class="txt"><a class="txt" href="#">点击查看更多</a></p>
+								</div>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="img/touxiang.jpg"/>
+								<div class="ziliao">
+									<p class="name">化妆师：<span>李多多</span></p>
+									<p class="txt">星级：<span>3星</span></p>
+									<p class="txt">爱美宣言:<span></span></p>
+									<p class="txt"><a class="txt" href="#">点击查看更多</a></p>
+								</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="bottom">
+				<ul>
+					<li>
+						<a href="#">
+							<span><img src="img/index.png"/></span>
+							<p>首页</p>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<span><img src="img/kefu.png"/></span>
+							<p>客服</p>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<span><img src="img/dingdan.png"/></span>
+							<p>订单</p>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<span><img src="img/wode.png"/></span>
+							<p>我的</p>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</body>
+</html>
